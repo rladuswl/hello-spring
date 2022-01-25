@@ -11,12 +11,12 @@ import java.util.Optional;
 
 // Ctrl + Shift + T 누르면 Create Test
 
-@Service // 어노테이션 넣어줘야 스프링 컨테이너에 등록됨
+//@Service // 어노테이션 넣어줘야 스프링 컨테이너에 등록됨
 public class MemberService {
 
     private final MemberRepository memberRepository;
 
-    @Autowired // MemberService 생성할 때 스프링 컨테이너에서 MemberRepository를 가져다가 넣어줌 (사실상 MemberRepository의 구현체가 MemoryMemberRepository이므로 이게 주입됨)
+    //@Autowired // MemberService 생성할 때 스프링 컨테이너에서 MemberRepository를 가져다가 넣어줌 (사실상 MemberRepository의 구현체가 MemoryMemberRepository이므로 이게 주입됨)
     public MemberService(MemberRepository memberRepository) {
         this.memberRepository = memberRepository;
     }
