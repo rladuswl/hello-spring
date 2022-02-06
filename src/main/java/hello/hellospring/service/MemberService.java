@@ -20,13 +20,18 @@ public class MemberService {
 
     //@Autowired // MemberService 생성할 때 스프링 컨테이너에서 MemberRepository를 가져다가 넣어줌 (사실상 MemberRepository의 구현체가 MemoryMemberRepository이므로 이게 주입됨)
     public MemberService(MemberRepository memberRepository) {
+
         this.memberRepository = memberRepository;
+
+        System.out.println("memberRepository = " + memberRepository.getClass()); // 프록시 조회해보기
+
     }
 
     /**
      * 회원가입
      */
     public Long join(Member member) {
+
 
         // 같은 이름이 있는 중복 회원 X
         // Optional로 감싸서 반환했기 때문에 ifPresent 같이 쓸 수 있음.
@@ -51,6 +56,7 @@ public class MemberService {
         validateDuplicateMember(member); //중복 회원 검증
         memberRepository.save(member);
         return member.getId();
+
     }
 
     private void validateDuplicateMember(Member member) {

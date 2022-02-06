@@ -1,5 +1,6 @@
 package hello.hellospring;
 
+import hello.hellospring.aop.TimeTraceAop;
 import hello.hellospring.repository.*;
 import hello.hellospring.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,12 +15,20 @@ import javax.sql.DataSource;
 @Configuration
 public class SpringConfig {
 
-    private EntityManager em;
+    private final MemberRepository memberRepository;
 
     @Autowired
-    public SpringConfig(EntityManager em) {
-        this.em = em;
+    public SpringConfig(MemberRepository memberRepository) {
+        this.memberRepository = memberRepository;
     }
+
+    //    private EntityManager em;
+
+//    @Autowired
+//    public SpringConfig(EntityManager em) {
+//        this.em = em;
+//    }
+
 //    private DataSource dataSource;
 //
 //    @Autowired
@@ -29,14 +38,21 @@ public class SpringConfig {
 
     @Bean
     public MemberService memberService() {
-        return new MemberService(memberRepository()); // 스프링 빈으로 등록된 memberRepository 넣어줌
+        return new MemberService(memberRepository); // 스프링 빈으로 등록된 memberRepository 넣어줌
     }
 
-    @Bean
-    public MemberRepository memberRepository() {
+//    @Bean // TimeTraceAop를 스프링 빈에 등록
+//    public TimeTraceAop timeTraceAop()
+//    {
+//        return new TimeTraceAop();
+//    }
+
+
+//    @Bean
+//    public MemberRepository memberRepository() {
 //        return new MemoryMemberRepository(); // 구현체를 new 해야함. MemberRepository는 인터페이스라서 new 불가능
 //        return new JdbcMemberRepository(dataSource);
 //        return new JdbcTemplateMemberRepository(dataSource);
-        return new JpaMemberRepository(em);
-    }
+//        return new JpaMemberRepository(em);
+//    }
 }

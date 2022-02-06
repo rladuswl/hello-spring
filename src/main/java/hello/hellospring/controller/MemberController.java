@@ -21,7 +21,9 @@ public class MemberController {
 
     @Autowired // 스프링이 스프링 컨테이너에 있는 MemberService를 가져와서 연결시킴 -> DI(의존성 주입)
     public MemberController(MemberService memberService) {
+
         this.memberService = memberService;
+        System.out.println("memberService = " + memberService.getClass()); // 프록시 조회해보기
     }
 
     // 회원 등록
